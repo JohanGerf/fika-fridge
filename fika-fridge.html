@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fika Fridge 🧊</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #0d0d0d 0%, #1a1a2e 100%);
+      color: #e2e8f0;
+      min-height: 100vh;
+      padding: 1.5rem 1rem 3rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 0.25rem;
+    }
+
+    header p {
+      color: #a0aec0;
+      font-size: 0.95rem;
+    }
+
+    .tier {
+      background: #1e1e2e;
+      border-radius: 1rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+      overflow: hidden;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      transition: box-shadow 0.2s;
+    }
+
+    .tier:hover {
+      box-shadow: 0 6px 24px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .tier-header {
+      padding: 1rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .tier-header h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+
+    .tier-price {
+      font-size: 1.5rem;
+      font-weight: 700;
+      border-radius: 0.5rem;
+      padding: 0.15rem 0.75rem;
+    }
+
+    /* Green tier */
+    .tier.green .tier-header { background: linear-gradient(135deg, #1a3a2a 0%, #22543d 100%); }
+    .tier.green .tier-price { color: #68d391; }
+    .tier.green .tier-header h2 { color: #9ae6b4; }
+
+    /* Blue tier */
+    .tier.blue .tier-header { background: linear-gradient(135deg, #1a365d 0%, #2a4365 100%); }
+    .tier.blue .tier-price { color: #63b3ed; }
+    .tier.blue .tier-header h2 { color: #90cdf4; }
+
+    /* Purple tier */
+    .tier.purple .tier-header { background: linear-gradient(135deg, #322659 0%, #44337a 100%); }
+    .tier.purple .tier-price { color: #b794f4; }
+    .tier.purple .tier-header h2 { color: #d6bcfa; }
+
+    .tier-items {
+      list-style: none;
+      padding: 0.5rem 0;
+    }
+
+    .tier-items li {
+      display: flex;
+      align-items: center;
+      padding: 0.7rem 1.25rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      font-size: 0.95rem;
+      transition: background 0.15s;
+    }
+
+    .tier-items li:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .tier-items li:last-child {
+      border-bottom: none;
+    }
+
+    .item-emoji {
+      font-size: 1.3rem;
+      margin-right: 0.75rem;
+      width: 1.5rem;
+      text-align: center;
+    }
+
+    .item-name {
+      flex: 1;
+    }
+
+    .item-category {
+      font-size: 0.75rem;
+      color: #718096;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pay-note {
+      text-align: center;
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: linear-gradient(135deg, #2d2006 0%, #3d2b0a 100%);
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+      font-size: 0.9rem;
+      color: #fbd38d;
+      line-height: 1.5;
+      border: 1px solid rgba(251,211,141,0.2);
+    }
+
+    .pay-note strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 0.25rem;
+      color: #f6e05e;
+    }
+
+    .search-box {
+      max-width: 500px;
+      margin: 0 auto 1.5rem;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 2px solid rgba(255,255,255,0.1);
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      background: #1e1e2e;
+      color: #e2e8f0;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      outline: none;
+    }
+
+    .search-box input::placeholder {
+      color: #718096;
+    }
+
+    .search-box input:focus {
+      border-color: #63b3ed;
+      box-shadow: 0 0 0 3px rgba(99, 179, 237, 0.2);
+    }
+
+    .search-box .search-icon {
+      position: absolute;
+      left: 0.9rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 1.1rem;
+      pointer-events: none;
+    }
+
+    .tier-items li.hidden {
+      display: none;
+    }
+
+    .tier.hidden {
+      display: none;
+    }
+
+    .no-results {
+      text-align: center;
+      color: #718096;
+      font-size: 0.95rem;
+      padding: 2rem 1rem;
+      display: none;
+      max-width: 500px;
+      margin: 0 auto;
+    }
+
+    .no-results.visible {
+      display: block;
+    }
+
+    .tier-items li.highlight {
+      background: rgba(246, 224, 94, 0.08);
+    }
+
+    .item-stock {
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      white-space: nowrap;
+      margin-left: 0.5rem;
+      background: rgba(255,255,255,0.08);
+      color: #a0aec0;
+    }
+
+    .stock-updated {
+      text-align: center;
+      margin-top: 1.5rem;
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+      color: #4a5568;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .leaderboard {
+      max-width: 500px;
+      margin: 1.5rem auto;
+      background: #1e1e2e;
+      border-radius: 1rem;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3), 0 0 0 1px rgba(255,255,255,0.05);
+      overflow: hidden;
+    }
+
+    .leaderboard-header {
+      background: linear-gradient(135deg, #3d2b0a 0%, #5a3e10 100%);
+      padding: 1rem 1.25rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #f6e05e;
+    }
+
+    .leaderboard-list {
+      list-style: none;
+      padding: 0.5rem 0;
+    }
+
+    .leaderboard-list li {
+      display: flex;
+      align-items: center;
+      padding: 0.7rem 1.25rem;
+      font-size: 1rem;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.15s;
+    }
+
+    .leaderboard-list li:hover {
+      background: rgba(255,255,255,0.04);
+    }
+
+    .leaderboard-list li:last-child {
+      border-bottom: none;
+    }
+
+    .leaderboard-rank {
+      font-size: 1.4rem;
+      margin-right: 0.75rem;
+      width: 1.5rem;
+      text-align: center;
+    }
+
+    .leaderboard-name {
+      flex: 1;
+      font-weight: 500;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍫🧊 Fika Fridge 🥤🍪</h1>
+    <p>Grab what you want — just pay the right tier!</p>
+  </header>
+
+  <div class="pay-note">
+    <strong>💳 How to pay</strong>
+    Swish the amount using the correct QR code.<br>
+    Be honest — prices are low to keep it fair for everyone!
+  </div>
+
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" id="searchInput" placeholder="Search for an item..." autocomplete="off">
+  </div>
+
+  <div class="no-results" id="noResults">No items found</div>
+
+  <!-- 8 kr tier -->
+  <div class="tier green">
+    <div class="tier-header">
+      <h2>Budget</h2>
+      <span class="tier-price">8 kr</span>
+    </div>
+    <ul class="tier-items">
+      <li>
+        <span class="item-emoji">💧</span>
+        <span class="item-name">Ramlösa Citrus<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-ok">×20</span>
+      </li>
+      <li>
+        <span class="item-emoji">💧</span>
+        <span class="item-name">Ramlösa Granatäpple<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-ok">×20</span>
+      </li>
+      <li>
+        <span class="item-emoji">🍫</span>
+        <span class="item-name">Kinder Maxi<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-ok">×36</span>
+      </li>
+      <li>
+        <span class="item-emoji">🍫</span>
+        <span class="item-name">Kinder Country<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-low">×4</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 12 kr tier -->
+  <div class="tier blue">
+    <div class="tier-header">
+      <h2>Standard</h2>
+      <span class="tier-price">13 kr</span>
+    </div>
+    <ul class="tier-items">
+      <li>
+        <span class="item-emoji">🥤</span>
+        <span class="item-name">Cola Zero<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-ok">×20</span>
+      </li>
+      <li>
+        <span class="item-emoji">🥤</span>
+        <span class="item-name">Cola<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-ok">×20</span>
+      </li>
+      <li>
+        <span class="item-emoji">🧃</span>
+        <span class="item-name">Juice Passion Appelsin<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-low">×5</span>
+      </li>
+      <li>
+        <span class="item-emoji">☕</span>
+        <span class="item-name">Iskaffe<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-ok">×12</span>
+      </li>
+      <li>
+        <span class="item-emoji">🍫</span>
+        <span class="item-name">Twix<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-ok">×32</span>
+      </li>
+      <li>
+        <span class="item-emoji">🍪</span>
+        <span class="item-name">Kex<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-low">×8</span>
+      </li>
+    </ul>
+  </div>
+
+  <!-- 17 kr tier -->
+  <div class="tier purple">
+    <div class="tier-header">
+      <h2>Premium</h2>
+      <span class="tier-price">18 kr</span>
+    </div>
+    <ul class="tier-items">
+      <li>
+        <span class="item-emoji">🍹</span>
+        <span class="item-name">VitaminWell<br><span class="item-category">Drink</span></span>
+        <span class="item-stock stock-low">×6</span>
+      </li>
+      <li>
+        <span class="item-emoji">💪</span>
+        <span class="item-name">Protein Bar — Banana Choco<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-ok">×18</span>
+      </li>
+      <li>
+        <span class="item-emoji">💪</span>
+        <span class="item-name">Protein Bar — Chewy Brownie<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-ok">×15</span>
+      </li>
+      <li>
+        <span class="item-emoji">🍬</span>
+        <span class="item-name">Trolli Godis<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-critical">×3</span>
+      </li>
+      <li>
+        <span class="item-emoji">🍫</span>
+        <span class="item-name">KitKat Balls<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-critical">×2</span>
+      </li>
+      <li>
+        <span class="item-emoji">🎅</span>
+        <span class="item-name">Chokladtomte<br><span class="item-category">Snack</span></span>
+        <span class="item-stock stock-critical">×2</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="leaderboard">
+    <div class="leaderboard-header">🏆 Top 3 Buyers</div>
+    <ul class="leaderboard-list">
+      <li>
+        <span class="leaderboard-rank">🥇</span>
+        <span class="leaderboard-name">Emma</span>
+      </li>
+      <li>
+        <span class="leaderboard-rank">🥈</span>
+        <span class="leaderboard-name">Stas</span>
+      </li>
+      <li>
+        <span class="leaderboard-rank">🥉</span>
+        <span class="leaderboard-name">Oscar</span>
+      </li>
+    </ul>
+  </div>
+
+  <div class="stock-updated">📦 Stocks updated on Monday 16th of March</div>
+
+  <script>
+    const input = document.getElementById('searchInput');
+    const tiers = document.querySelectorAll('.tier');
+    const noResults = document.getElementById('noResults');
+
+    input.addEventListener('input', () => {
+      const query = input.value.toLowerCase().trim();
+      let totalVisible = 0;
+
+      tiers.forEach(tier => {
+        const items = tier.querySelectorAll('.tier-items li');
+        let tierVisible = 0;
+
+        items.forEach(li => {
+          const name = li.querySelector('.item-name').textContent.toLowerCase();
+          const match = !query || name.includes(query);
+          li.classList.toggle('hidden', !match);
+          li.classList.toggle('highlight', match && query.length > 0);
+          if (match) tierVisible++;
+        });
+
+        tier.classList.toggle('hidden', tierVisible === 0);
+        totalVisible += tierVisible;
+      });
+
+      noResults.classList.toggle('visible', totalVisible === 0 && query.length > 0);
+    });
+  </script>
+</body>
+</html>
