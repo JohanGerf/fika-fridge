@@ -212,19 +212,11 @@
       border-radius: 999px;
       white-space: nowrap;
       margin-left: 0.5rem;
-      background: rgba(255,255,255,0.08);
-      color: #a0aec0;
     }
 
-    .stock-updated {
-      text-align: center;
-      margin-top: 1.5rem;
-      margin-bottom: 1rem;
-      font-size: 0.8rem;
-      color: #4a5568;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
+    .stock-out {
+      background: rgba(245, 101, 101, 0.15);
+      color: #fc8181;
     }
 
     .leaderboard {
@@ -309,22 +301,19 @@
       <li>
         <span class="item-emoji">💧</span>
         <span class="item-name">Ramlösa Citrus<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-ok">×20</span>
       </li>
       <li>
         <span class="item-emoji">💧</span>
         <span class="item-name">Ramlösa Granatäpple<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-ok">×19</span>
       </li>
       <li>
         <span class="item-emoji">🍫</span>
         <span class="item-name">Kinder Maxi<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-ok">×34</span>
       </li>
       <li>
         <span class="item-emoji">🍫</span>
         <span class="item-name">Kinder Country<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-critical">×2</span>
+        <span class="item-stock stock-out">Sold out</span>
       </li>
     </ul>
   </div>
@@ -339,32 +328,26 @@
       <li>
         <span class="item-emoji">🥤</span>
         <span class="item-name">Cola Zero<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-ok">×19</span>
       </li>
       <li>
         <span class="item-emoji">🥤</span>
         <span class="item-name">Cola<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-ok">×20</span>
       </li>
       <li>
         <span class="item-emoji">🧃</span>
         <span class="item-name">Juice Passion Appelsin<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-low">×5</span>
       </li>
       <li>
         <span class="item-emoji">☕</span>
         <span class="item-name">Iskaffe<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-ok">×12</span>
       </li>
       <li>
         <span class="item-emoji">🍫</span>
         <span class="item-name">Twix<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-ok">×31</span>
       </li>
       <li>
         <span class="item-emoji">🍪</span>
         <span class="item-name">Kex<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-low">×8</span>
       </li>
     </ul>
   </div>
@@ -379,32 +362,26 @@
       <li>
         <span class="item-emoji">🍹</span>
         <span class="item-name">VitaminWell<br><span class="item-category">Drink</span></span>
-        <span class="item-stock stock-low">×6</span>
       </li>
       <li>
         <span class="item-emoji">💪</span>
         <span class="item-name">Protein Bar — Banana Choco<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-ok">×16</span>
       </li>
       <li>
         <span class="item-emoji">💪</span>
         <span class="item-name">Protein Bar — Chewy Brownie<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-ok">×14</span>
       </li>
       <li>
         <span class="item-emoji">🍬</span>
         <span class="item-name">Trolli Godis<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-critical">×3</span>
       </li>
       <li>
         <span class="item-emoji">🍫</span>
         <span class="item-name">KitKat Balls<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-critical">×2</span>
       </li>
       <li>
         <span class="item-emoji">🎅</span>
         <span class="item-name">Chokladtomte<br><span class="item-category">Snack</span></span>
-        <span class="item-stock stock-critical">×2</span>
       </li>
     </ul>
   </div>
@@ -414,20 +391,20 @@
     <ul class="leaderboard-list">
       <li>
         <span class="leaderboard-rank">🥇</span>
-        <span class="leaderboard-name">Emma</span>
+        <span class="leaderboard-name">Johan</span>
       </li>
       <li>
         <span class="leaderboard-rank">🥈</span>
-        <span class="leaderboard-name">Stas</span>
+        <span class="leaderboard-name">Axel</span>
       </li>
       <li>
         <span class="leaderboard-rank">🥉</span>
-        <span class="leaderboard-name">Oscar</span>
+        <span class="leaderboard-name">Stas</span>
       </li>
     </ul>
   </div>
 
-  <div class="stock-updated">📦 Stocks updated on Tuesday 17th of March</div>
+
 
   <script>
     const input = document.getElementById('searchInput');
