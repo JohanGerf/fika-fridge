@@ -23,6 +23,8 @@ for row in range(1, table.num_rows):
     category_counts[category] += 1
     person_spend[person] += price
 
+print(f"=== Number of different customers: {len(person_spend)} ===")
+print()
 print("=== Items bought per category ===")
 for cat, count in sorted(category_counts.items(), key=lambda x: -x[1]):
     print(f"  {cat:10s}  {count} items")
