@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Analyze TransactionTracker.numbers — items per category and spend per person."""
+"""Analyze TransactionTracker.numbers — items per category»."""
 
 from collections import defaultdict
 from numbers_parser import Document
