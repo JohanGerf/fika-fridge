@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fika Fridge — Print</title>
+  <style>
+    @page {
+      size: A4 landscape;
+      margin: 1.2cm;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      color: #1a1a2e;
+      background: #fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 0.6cm;
+    }
+
+    header h1 {
+      font-size: 1.6rem;
+      margin-bottom: 0.1cm;
+    }
+
+    header p {
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .columns {
+      display: flex;
+      gap: 0.8cm;
+    }
+
+    .tier {
+      flex: 1;
+      border: 2px solid #ccc;
+      border-radius: 0.6rem;
+      overflow: hidden;
+    }
+
+    .tier-header {
+      padding: 0.4cm 0.5cm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .tier-header h2 {
+      font-size: 1rem;
+    }
+
+    .tier-price {
+      font-size: 1.3rem;
+    }
+
+    .tier.green .tier-header { background: #22543d; }
+    .tier.blue .tier-header { background: #2a4365; }
+    .tier.purple .tier-header { background: #44337a; }
+
+    .tier-items {
+      list-style: none;
+      padding: 0.2cm 0;
+    }
+
+    .tier-items li {
+      display: flex;
+      align-items: center;
+      padding: 0.18cm 0.4cm;
+      font-size: 0.85rem;
+      border-bottom: 1px solid #e8e8e8;
+    }
+
+    .tier-items li:last-child {
+      border-bottom: none;
+    }
+
+    .item-emoji {
+      font-size: 1.1rem;
+      margin-right: 0.3cm;
+      width: 1.2rem;
+      text-align: center;
+    }
+
+    .item-name {
+      flex: 1;
+      font-weight: 500;
+    }
+
+    .item-category {
+      font-size: 0.65rem;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    .pay-note {
+      text-align: center;
+      margin-top: 0.5cm;
+      font-size: 0.8rem;
+      color: #555;
+      border: 1px dashed #aaa;
+      border-radius: 0.4rem;
+      padding: 0.3cm 0.5cm;
+    }
+
+    .pay-note strong {
+      color: #1a1a2e;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🍫🧊 Fika Fridge 🥤🍪</h1>
+    <p>Grab what you want — just pay the right tier!</p>
+  </header>
+
+  <div class="columns">
+    <!-- Budget -->
+    <div class="tier green">
+      <div class="tier-header">
+        <h2>Budget</h2>
+        <span class="tier-price">8 kr</span>
+      </div>
+      <ul class="tier-items">
+        <li>
+          <span class="item-emoji">💧</span>
+          <span class="item-name">Ramlösa Citrus<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">💧</span>
+          <span class="item-name">Ramlösa Granatäpple<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Kinder Maxi<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Chokladboll<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Dammsugare<br><span class="item-category">Snack</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Standard -->
+    <div class="tier blue">
+      <div class="tier-header">
+        <h2>Standard</h2>
+        <span class="tier-price">13 kr</span>
+      </div>
+      <ul class="tier-items">
+        <li>
+          <span class="item-emoji">🥤</span>
+          <span class="item-name">Cola Zero<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🥤</span>
+          <span class="item-name">Cola<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🥤</span>
+          <span class="item-name">Juice Passion Appelsin<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">☕</span>
+          <span class="item-name">Iskaffe Choco Latte<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">☕</span>
+          <span class="item-name">Iskaffe Cappuccino Vanilla<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Twix<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Kex<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Knoppers<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Nötbar Cashew<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍫</span>
+          <span class="item-name">Schweizernöt Marabou<br><span class="item-category">Snack</span></span>
+        </li>
+      </ul>
+    </div>
+
+    <!-- Premium -->
+    <div class="tier purple">
+      <div class="tier-header">
+        <h2>Premium</h2>
+        <span class="tier-price">18 kr</span>
+      </div>
+      <ul class="tier-items">
+        <li>
+          <span class="item-emoji">🍹</span>
+          <span class="item-name">VitaminWell<br><span class="item-category">Drink</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">💪</span>
+          <span class="item-name">Protein Bar — Banana Choco<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">💪</span>
+          <span class="item-name">Protein Bar — Chewy Brownie<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🍬</span>
+          <span class="item-name">Trolli Godis<br><span class="item-category">Snack</span></span>
+        </li>
+        <li>
+          <span class="item-emoji">🎅</span>
+          <span class="item-name">Chokladtomte<br><span class="item-category">Snack</span></span>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="pay-note">
+    <strong>💳 How to pay:</strong> Swish the amount using the correct QR code. Be honest — prices are low to keep it fair for everyone!
+  </div>
+</body>
+</html>
